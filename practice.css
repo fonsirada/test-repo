@@ -1,0 +1,46 @@
+/* # is for id, . is for class, no punctuation is for elements */
+#naruto {
+    color: rgb(238, 194, 19);
+}
+h1 {
+    text-align: center;
+    background-color: fuchsia;
+}
+
+/* , represents multiple - both ol and a */
+div.linkedin, ol {
+    text-decoration: line-through;
+}
+div.anime {
+    text-align: center;
+    border: 10px dashed red;
+    padding: 10px;
+    background-image: url(https://static1.cbrimages.com/wordpress/wp-content/uploads/2022/02/One-Piece-Monkey-D.-Luffy-Cropped-Cropped.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: #670ffe;
+}
+li#chainsawman {
+    color: rgb(229, 30, 20);
+}
+li#jjk {
+    color: rgb(251, 13, 171);
+}
+li#aot {
+    color: rgb(111, 25, 25);
+}
+li#bleach {
+    color: rgb(17, 166, 235);
+}
+/* > represents child-parent, li inside of ul */
+ul > li {
+    text-decoration: underline wavy;
+    color: #ff0000;
+}
+div.linkedin {
+    font-family: impact, fantasy;
+    font-size: 30px;
+}
+img {
+    width: 50%;
+}
