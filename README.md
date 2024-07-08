@@ -1,2 +1,2 @@
 # test-repo
-first try
+relearning html and css, and attempting to learn javascript
