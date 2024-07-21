@@ -2,7 +2,6 @@
 
 ### STRINGS
 
-
 message = "Hello World" # or could be 'Hello World', i like to use '' for chars and "" for more than 1 char
 
 # multi-line strings - uses 3 quotation marks
@@ -43,6 +42,14 @@ phrase = "{}, {}, Welcome!".format(greeting, name) #returns "Hi, Fonz, Welcome!"
 phraseF = f"{greeting}, {name}, Welcome!" #returns "Hi, Fonz, Welcome!" - can also use '',
 # can also call methods on the objects that are formatted into the string
 phraseF = f"{greeting.lower()}, {name.upper()}, Welcome!" #returns "hi, FONZ, Welcome!"
+
+## Escape sequnces
+
+#\n #new line
+#\t #tab
+#\\ #backslash (\)
+#\' #single quote (')
+#\" #double quote (")
 
 ###             DIR & HELP FUNCTIONS
 
@@ -262,7 +269,8 @@ for key, value in student.items():
 ## if, elif, and else statements
 language = "Python"
 if language == "Python":
-    print("Conditional was True")
+    #print("Conditional was True")
+    pass
 elif language == "Java":
     print("Language is Java")
 else:
@@ -277,17 +285,20 @@ internet = True
 if logged_in and internet:
     print("You can log-in!")
 else:
-    print("You cannot log-in.")
+    #print("You cannot log-in.")
+    pass
 
 # or - only one of the sides of the operator has to be true to pass
 if logged_in or internet:
-    print("You can almost log-in!")
+    #print("You can almost log-in!")
+    pass
 else:
     print("You absolutely cannot log-in.")
 
 # not - switches booleans (T to F, F to T)
 if not logged_in:
-    print("Logged out")
+    #print("Logged out")
+    pass
 else:
     print("Logged in!")
 
@@ -309,6 +320,329 @@ condition = ()
 if condition:
     print("This is not an empty tuple")
 else:
-    print("This is an empty tuple!!")
+    #print("This is an empty tuple!!")
+    pass
 
 ### LOOPS & ITERATIONS
+
+nums = [1,2,3,4,5]
+
+# break keyword - breaks out of for loop when called
+for num in nums:
+    if num == 3:
+        #print('Found!')
+        break
+    #print(num) #returns 1 2 "Found!" (break)
+
+# continue keyword - skips to next iteration when called
+for num in nums:
+    if num == 3:
+        #print("Found!")
+        continue
+    #print(num) # returns 1 2 "Found!" (continue) 4 5
+
+## loops within loops
+for num in nums:
+    for letter in "abc":
+        #print(num, letter) #returns 1 a, 1 b 1 c 2 a 2 b 2 c ...
+        pass
+
+# for loops in range - runs for set nuumber of iterations (or a break)
+        #10 iterations
+for i in range(10):
+    #print(i)
+    pass
+            #starts at 1 goes up to 11 (exclusive)
+for i in range(1, 11):
+    #print(i)
+    pass
+
+# while loops - runs until condition is no longer met (or a break)
+x = 0
+while x < 10:
+    #print(x)
+    x += 1
+
+# common infinite loop that runs until a break
+x = 0
+while True:
+    if x == 5:
+        break
+    #print(x)
+    x += 1
+
+## Functions - instructions packaged together that perform a specific task
+
+# constructing a function
+def hello_func():
+    pass #allows the function to pass without leaving it blank
+
+#print(hello_func) # returns the memmory address
+
+# parameters
+def func(greeting):
+    return '{} Function.'.format(greeting)
+func("Hi") #returns 'Hi Function.' - need to call print
+
+def func2(greeting, name="Stranger"):
+    return "{}, {}".format(greeting, name)
+func2("Hi") #returns 'Hi, Stranger" - uses default from parameter, if no name is passed as an argument
+func2("Hi", "Alfonso") #returns 'Hi, Alfonso'
+func2("Hi", name="Alfonso") #also returns 'Hi, Alfonso'
+
+# functions with unknown amo. of arguments, positional args and positional keyword args
+                #arguments, keyword arguments i.e: name = "Stranger"
+def student_info(*args, **kwargs):
+    """This is a docustring that explains what a function does"""
+    #print(args) # returns a tuple holding the positional arguments
+    #print(kwargs) # returns a dictionary holding the keyword arguments and their values
+    pass
+
+student_info("Math", "Art", name="John", age=22)
+
+courses = ["Math", "Art"]
+info = {"name": "John", "age": 22}
+
+student_info(courses, info) #returns both courses and info in positional arguments tuple
+
+student_info(*courses, **info) #returns the same thing as student_info("Math", "Art", name="John", age=22), with courses in tuple and info in dictionary
+
+### IMPORTING MODULES & STANDARD LIBRARY
+import os
+os.getcwd() #returns current working directory
+
+##### PYTHON OOP
+
+### Classes - logically group data and functions in a way that is easy to reuse and build upon
+
+# attributes - variables within an object/class
+
+# methods - functions that are associated with an object/class
+
+# constructing a class
+class Employee:
+    pass
+
+# These are each their own unique instances of the Employee object/class, they have different memory addresses
+emp_1 = Employee() 
+emp_2 = Employee()
+
+#print(emp_1) #returns memory address 
+#print(emp_2) #returns memory address
+
+#instance variables contain data that is unique to each instance
+
+emp_1.first = "Alfonso"
+emp_1.last = "Rada"
+emp_1.email = "arada@hamilton.edu"
+emp_1.pay = 50000
+
+emp_2.first = "Test"
+emp_2.last = "User"
+emp_2.email = "Test.User@company.com"
+emp_2.pay = 60000
+
+#instead of having to write out all of this code for each employee, we can just use functions within our class, methods.
+
+class Employee:
+
+    num_of_emps = 0
+    raise_amount = 1.04
+
+    #think of this as the constructor
+            #the instance is always the first argument received (self)
+    def __init__(self, first, last, pay):
+        self.first = first
+        self.last = last
+        self.pay = pay
+        self.email = first + "." + last + "@company.com"
+
+        #can also alter class variables across all instances within the class itself
+        Employee.num_of_emps += 1
+    
+    def fullname(self):
+        return "{} {}".format(self.first, self.last)
+
+    def apply_raise(self):
+                #each instance can access class variables, and also have a unique value for it
+        self.pay = int(self.pay * self.raise_amount)
+
+    @classmethod #cls is class, like self but for the whole class, not just 1 instance
+    def set_raise_amt(cls, amount):
+        cls.raise_amount = amount
+
+    @classmethod
+    def from_string(cls, emp_str):
+        first, last, pay = emp_str.split('-')
+        return cls(first, last, pay)
+    
+    @staticmethod #does not pass self or cls as an argument
+    def is_workday(day):
+        if day.weekday() == 5 or day.weekday() == 6:
+            return False
+        return True
+    
+    def __repr__(self):
+        return "Employee('{}', '{}', {})".format(self.first, self.last, self.pay)
+
+    def __str__(self):
+        return "{} - {}".format(self.fullname(), self.email)
+    
+    def __add__(self, other):
+        return self.pay + other.pay
+    
+    def __len__(self):
+        return len(self.fullname())
+
+#now you can just pass the data as arguments and set up the instance variables much more efficiently
+emp_1 = Employee("Alfonso", "Rada", 50000)
+emp_2 = Employee("Test", "User", 60000)
+
+emp_1.email #returns the email of emp_1 instance
+emp_2.email #returns the email of emp_2 instance
+
+emp_1.fullname() #calls fullname() method of Employee object and returns fullname of instance emp_1
+
+#Employee.fullname() #this will return an error because an instance is not given, leaving the argument 'self' without a variable.
+Employee.fullname(emp_1) #this will work because now self has a value, emp_1
+emp_1.fullname() #this will work because emp_1 is an instance and is calling the method
+
+#Each instance can access class variables, and also have a unique value for it
+#Employee is the class, so the default value of raise_amount for all Employee object instances is 1.04
+Employee.raise_amount #returns 1.04
+emp_1.raise_amount #return 1.04
+#however, you can set instances to have unique values for class variables (adding the attribute to the instance)
+emp_2.raise_amount = 1.05
+emp_2.raise_amount #returns 1.05
+
+# .__dict__ - returns dictionary containing the attributes in object calling it
+emp_2.__dict__ #returns a dictionary of the attributes in emp_2: {'first': 'Test', 'last': 'User', 'pay': 60000, 'email': 'Test.User@company.com', 'raise_amount': 1.05}
+
+## Class methods - makes changes across the entire class, not just an instance, takes in the class as an argument rather than self
+
+Employee.set_raise_amt(1.07) #changes the raise_amount class variable for the Employee class/object
+emp_1.raise_amount #returns 1.07
+Employee.raise_amount #returns 1.07 (default class variable)
+emp_2.raise_amount #stays at 1.05 because raise_amount was not the default, it was user set to 1.05
+
+emp_str_1 = "John-Doe-70000"
+new_emp = Employee.from_string(emp_str_1) #creates a new instance of Employee object/class using from_string classmethod, behaves kind of like a constructor
+
+## Static methods - do not pass the instance or the class as arguments, unlike regular methods and class methods, they behave just like regular functions. A giveaway that a method should be static is if an instance or a class is not accessed at all in the function
+
+### Inheritance & Subclasses
+
+# declares that Developer is a subclass of Employee class (inherits Employee's attributes and methods)
+class Developer(Employee):
+    raise_amount = 1.10
+
+    def __init__(self, first, last, pay, prog_lang):
+        super().__init__(first, last, pay) #same as Employee.__init__(first, last, pay)
+        self.prog_lang = prog_lang
+
+class Manager(Employee):
+    def __init__(self, first, last, pay, employees=None):
+        super().__init__(first, last, pay)
+        if employees is None:
+            self.employees = []
+        else:
+            self.employees = employees
+
+    def add_emp(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+    
+    def remove_emp(self, emp):
+        if emp in self.employees:
+            self.employees.remove(emp)
+
+    def print_emp(self):
+        for emp in self.employees:
+            print("-->", emp.fullname())
+            
+dev_1 = Developer("Corey", "Schafer", 50000, "Python")
+dev_2 = Developer("Test", "Developer", 60000, "Java")
+dev_1.email #works the same, returns Corey.Schafer@company.com
+dev_2.prog_lang #returns "Java"
+
+mgr_1 = Manager("Sue", "Smith", 90000, [dev_1])
+
+# all methods that are unique only to Manager objects
+mgr_1.add_emp(dev_2)
+mgr_1.remove_emp(dev_1)
+
+# help function
+#help(Developer) # outputs the methods and attributes inheritied from superclass as well as method resolution order
+
+# method resolution order - order that instance looks for methods
+# 1. Developer (subclass) 2. Employee (superclass)
+
+# isinstance(object, class) - returns bool that declares whether object is an instance of class
+isinstance(mgr_1, Manager) #returns true
+
+# issubclass(class1, class2) - returns bool that declares whether class1 is a subclass of class2
+issubclass(Manager, Employee) #returns true
+issubclass(Manager, Developer) #returns false
+
+## Special (Magic/Dunder) Methods - operator overloading
+
+# methods surrounded by double underscores are Dunder methods (__) i.e: __init__
+
+# These are 2 MUST HAVE dunder methods, __repr__ and __str__
+# __repr__(self) method - outputs when print(inst) is called, also a fall back for if __str__ doesn't exist.
+emp_1.__repr__()
+repr(emp_1)
+
+# __str__(self) method - outputs when print(inst) is called, has higher priority than __repr__.
+emp_1.__str__()
+str(emp_1)
+#print(emp_1) # returns __str__ output, not __repr__ since __str__ exists and has higher priority
+
+# __add__(self, other) - operator overload function for adding Employee objects,
+emp_1 + emp_2 #returns the pay of emp_1 added to the pay of emp_2
+
+# __len__(self) - operator overload function for finding the length of an Employee object
+len(emp_1) #returns number of characters in an employees name
+
+## Property Decorators - Getters, Setters, and Deleters
+
+# @property decorator - allows a method to be called like an attribute (Getter)
+
+class Test_Employee:
+    def __init__(self, first, last):
+        self.first = first
+        self.last = last
+    
+    @property
+    def email(self):
+        return "{}.{}@company.com".format(self.first, self.last)
+    
+    @property
+    def fullname(self):
+        return "{} {}".format(self.first, self.last)
+    
+    @fullname.setter
+    def fullname(self, name):
+        first, last = name.split(' ')
+        self.first = first
+        self.last = last
+
+    @fullname.deleter
+    def fullname(self):
+        print("Delete Name!")
+        self.first = None
+        self.last = None
+
+    def __str__(self):
+        return "{}, {}".format(self.fullname, self.email)
+    
+test_emp = Test_Employee("Jesus", "Rada")
+test_emp.email #returns output of email method since it has @property above it, Jesus.Rada@company.com
+
+# @'method name'.setter decorator - allows a method to be called like an attribute and set to a variable (Setter) - 'method name' method must have property decorator above it
+test_emp.fullname = "Gleyber Torres" #sets Gleyber Torres to test_emp's fullname, even though it's a method and not an attribute
+test_emp.email #returns output of email method, which would be Gleyber.Torres@company.com
+
+# @'method name'.deleter decorator - runs when del instance.'method name' is called - 'method name' method must have property decortor above it
+
+del test_emp.fullname #returns fullname.deleter method, which sets self.first and self.last to None
