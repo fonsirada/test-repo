@@ -1,0 +1,60 @@
+Big O Notation - measures efficiency of code, only care about the largest term
+O(1) - Constant time
+    - Time is always the same regardless of input size
+        - Big giveaway is dealing with end of a data structure (no need to shift other elements) or grabbing one specific element
+
+O(n) - Linear time
+    - As input size grows, time grows proportionately
+        - Big giveaway is looping through a list of elements or dealing with middle elements of a data structure (have to shift other elements)
+    - Heapifying and sliding window is also O(n)
+
+O(n^2) - Quadratic time
+    - As input size grows, time grows two-fold
+        - Big giveaway is iterating over two-dimensional arrays, or looping through a list for each element of the same list
+    - Insertion sort is O(n^2)
+
+O(n*m) - Similar to quadratic time, but with diff size inputs
+    - Big giveaway is iterating over two-dimensional arrays with a diff num of cols than rows
+
+O(n^3) - Cubic time
+    - Big giveaway is three nested loops
+
+O(logn) - Logarithmic time
+    - Through each iteration we eliminate half of the elements from consideration
+    - Usually applied to binary search, binary search trees, pushing and popping from a heap
+
+O(nlogn) - Marginally less efficient than O(n)
+    - Usually when calling logarithmic time functions (O(logn)) through loops (O(n))
+    - Most common in built-in sort methods, mergeSort, heapSort,
+
+O(C^n) - C is a constant, exponential time
+    - Most common in recursion with branches (num of branches is C), recursion in trees, fibonacci sequence
+
+O(n!) - Factorial time, very inefficient
+    - Most common in permutations, sometimes in graph problems
+
+Efficiency order (most to least)
+O(1) < O(logn) < O(sqrt(n)) < O(n) < O(nlogn) < O(n^2) < O(n^3) < O(C^n) < O(n!)
+
+RAM - Random Access Memory
+    - An integer stores 4 bytes or 32 bits
+    - A characters stores 1 byte or 8 bits
+
+arrays -
+    - elements are stored in memory in the same order as they are in the array
+
+stacks - 
+    - Last In First Out (LIFO) - pop(), append(), list[-1],
+
+singly linked lists -
+    Memory Storage: unlike arrays, the nodes in a linked list are stored in a random order
+    Traversal: O(n) - simple while loop
+        cur = ListNode 1
+        while cur:
+            cur = cur.next
+    Insertion: O(1)* (Better than arrays)
+        * Once you have a reference to the node
+        - We do not have to shift any elements since there is no requirement for the elements to be stored contiguously in memory.
+    Deletion: O(1)* (Better than arays)
+        * Once you have a reference to the node
+        - Only have to adjust one pointer
